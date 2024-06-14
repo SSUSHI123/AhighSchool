@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="reply")
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +17,10 @@ public class ReplyEnitity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // MySQL, MariaDB의 경우 자동증가하는 필드 IDENTITY, Oracle의 경우 SEQUENCE, AUTO 유동적 선택
     private Long idx;
+    @Column(length = 200, nullable = false)
+    private String content;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BlogEntity blog;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MemberEntity author;
 }
