@@ -85,4 +85,28 @@ public class MemberController {
             return "./errors/error-message";
     }
 
+    @PostMapping("{idx}/update")
+    public String updateMember(@PathVariable("idx") Long idx, @ModelAttribute("memberDto") MemberDto memberDto, Model model) {
+        // 기존 회원 정보 가져오기
+        MemberDto existingMember = memberService.readByIdx(idx);
+
+        if (existingMember != null) {
+            // 새로운 정보로 업데이트
+            existingMember.setName(memberDto.getName());
+            existingMember.setPhone(memberDto.getPhone());
+            existingMember.setAddress(memberDto.getAddress());
+            existingMember.setEmail(memberDto.getEmail());
+
+            // 업데이트 수행
+            if (memberService.update(existingMember) > 0) {
+                return "redirect:/"; // 업데이트 후 메인 페이지로 리다이렉트
+            } else {
+                model.addAttribute("message", "회원 정보 업데이트에 실패하였습니다.");
+                return "./errors/error-message"; // 실패 시 보여줄 페이지
+            }
+        } else {
+            model.addAttribute("message", "해당 회원을 찾을 수 없습니다.");
+            return "./errors/error-message"; // 회원이 존재하지 않을 경우 보여줄 페이지
+        }
+    }
 }

@@ -20,6 +20,8 @@ public class MemberServiceTest {
                     .id("id-" + i)
                     .pw("cometrue")
                     .name("name-" + i)
+                    .phone("phone-" + i)
+                    .address("address" + i)
                     .email("id-" + i + "@induk.ac.kr")
                     .build();
             memberService.create(dto);

@@ -45,17 +45,19 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int update(MemberDto memberDto) {
-        return 0;
+        MemberEntity entity = dtoToEntity(memberDto);
+        memberRepository.save(entity); // save 메서드는 존재하는 데이터를 갱신하기 위해 사용
+        return 1; // 성공적으로 업데이트 되었음을 의미하는 값을 반환
     }
 
     @Override
     public int delete(MemberDto memberDto) {
-        return 0;
+       return 0;
     }
-
     @Override
     public MemberDto loginById(MemberDto memberDto) {
         Optional<MemberEntity> memberEntityOptional = memberRepository.findByIdAndPw(memberDto.getId(), memberDto.getPw());
         return memberEntityOptional.map(this::entityToDto).orElse(null);
     }
+
 }

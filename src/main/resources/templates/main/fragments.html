@@ -169,7 +169,6 @@
                 </div>
             </div>
             <div class="user-notification" th:if="${session.id == null}">
-
                 <div class="dropdown">
                     <a
                             class="no-arrow"
@@ -395,9 +394,9 @@
     <div class="left-side-bar">
         <div class="brand-logo">
             <a href="../">
-                <img src="../vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
+                <img src="../vendors/images/shinhwa.jpeg" alt="" class="dark-logo" />
                 <img
-                        src="../vendors/images/deskapp-logo-white.svg"
+                        src="../vendors/images/shinhwa.jpeg"
                         alt=""
                         class="light-logo"
                 />
@@ -437,10 +436,10 @@
                             <li><a href="image-dropzone.html">Image Dropzone</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" th:if="${session.id == 'admin'}">
                         <a href="javascript:;" class="dropdown-toggle">
-								<span class="micon bi bi-table"></span
-                                ><span class="mtext">Tables</span>
+                            <span class="micon bi bi-table"></span>
+                            <span class="mtext">Tables</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="basic-table.html">Basic Tables</a></li>
