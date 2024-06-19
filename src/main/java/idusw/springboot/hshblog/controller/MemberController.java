@@ -93,6 +93,7 @@ public class MemberController {
         if (existingMember != null) {
             // 새로운 정보로 업데이트
             existingMember.setName(memberDto.getName());
+            // existingMember.setPw(memberDto.getPw());
             existingMember.setPhone(memberDto.getPhone());
             existingMember.setAddress(memberDto.getAddress());
             existingMember.setEmail(memberDto.getEmail());
@@ -102,6 +103,22 @@ public class MemberController {
                 return "redirect:/"; // 업데이트 후 메인 페이지로 리다이렉트
             } else {
                 model.addAttribute("message", "회원 정보 업데이트에 실패하였습니다.");
+                return "./errors/error-message"; // 실패 시 보여줄 페이지
+            }
+        } else {
+            model.addAttribute("message", "해당 회원을 찾을 수 없습니다.");
+            return "./errors/error-message"; // 회원이 존재하지 않을 경우 보여줄 페이지
+        }
+    }
+    @PostMapping("{idx}/delete")
+    public String deleteMember(@PathVariable("idx") Long idx, HttpSession session, Model model) {
+        MemberDto dto = memberService.readByIdx(idx);
+        if (dto != null) {
+            if (memberService.delete(dto) > 0) {
+                session.invalidate(); // 회원 탈퇴 후 세션 무효화
+                return "redirect:/"; // 메인 페이지로 리다이렉트
+            } else {
+                model.addAttribute("message", "회원 탈퇴에 실패하였습니다.");
                 return "./errors/error-message"; // 실패 시 보여줄 페이지
             }
         } else {

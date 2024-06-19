@@ -868,9 +868,9 @@
 											<!-- Tasks Tab End -->
 											<!-- Setting Tab start -->
 											<div
-												class="tab-pane fade height-100-p"
-												id="setting"
-												role="tabpanel"
+													class="tab-pane fade height-100-p"
+													id="setting"
+													role="tabpanel"
 											>
 												<div class="profile-setting">
 													<form id="profileForm" th:action="@{/members/{idx}/update(idx=${dto.idx})}" method="post">
@@ -880,6 +880,10 @@
 																<div class="form-group">
 																	<label for="name">Name</label>
 																	<input id="name" class="form-control form-control-lg" type="text" th:value="${dto.name}" name="name" />
+																</div>
+																<div class="form-group">
+																	<label for="password">Password</label>
+																	<input id="password" class="form-control form-control-lg" type="password" th:value="${dto.pw}" name="password" />
 																</div>
 																<div class="form-group">
 																	<label for="phone">Phone</label>
@@ -894,11 +898,15 @@
 																	<input id="email" class="form-control form-control-lg" type="email" th:value="${dto.email}" name="email" />
 																</div>
 																<div class="form-group mb-0">
-																<div class="form-group mb-0">
 																	<input type="submit" class="btn btn-primary" value="Save & Update" />
 																</div>
 															</li>
 														</ul>
+													</form>
+
+													<!-- Separate form for delete button -->
+													<form th:action="@{/members/{idx}/delete(idx=${dto.idx})}" method="post" style="margin-top: 20px;">
+														<button type="submit" class="btn btn-danger">Delete</button>
 													</form>
 												</div>
 											</div>

@@ -52,8 +52,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int delete(MemberDto memberDto) {
-       return 0;
+        MemberEntity entity = dtoToEntity(memberDto);
+        memberRepository.delete(entity);
+        return 1; // 성공적으로 삭제되었음을 의미하는 값을 반환
     }
+
     @Override
     public MemberDto loginById(MemberDto memberDto) {
         Optional<MemberEntity> memberEntityOptional = memberRepository.findByIdAndPw(memberDto.getId(), memberDto.getPw());
